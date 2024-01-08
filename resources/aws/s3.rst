@@ -1,0 +1,48 @@
+Simple Storage Service (S3)
+===========================
+
+S3cmd configuration to use with Swift storage object
+----------------------------------------------------
+
+.. code-block:: bash
+
+    $ vim ~/.s3cfg
+
+    bucket_location =
+    host_base = 102fb212.example-storage.com
+    host_bucket = 102fb212.example-storage.com
+    access_key = 1111111111
+    secret_key = 2222222222
+    signature_v2 = True
+    cloudfront_host =
+    simpledb_host =
+    website_endpoint =
+    website_error =
+    website_index =
+
+
+https://docs.minio.io/docs/s3cmd-with-minio
+
+
+Public Bucket in Amazon S3
+---------------------------
+
+Edit bucket policy and add this:
+Replace `BUCKET_NAME` with your bucket name.
+
+.. code-block:: bash
+
+    {
+        "Version": "2008-10-17",
+        "Statement": [
+            {
+                "Sid": "AllowPublicRead",
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": "*"
+                },
+                "Action": "s3:GetObject",
+                "Resource": "arn:aws:s3:::BUCKET_NAME/*"
+            }
+        ]
+    }
